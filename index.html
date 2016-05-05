@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="google" value="notranslate">
+
+
+    <title> ionicApp by ego</title>
+
+
+
+
+        <style>
+      .video-container {
+   padding: 10px;
+}
+
+.item h2 {
+   white-space: normal;
+}
+.btn-circle {
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    overflow: ;
+    z-index: 1;
+    width: 37px;
+    height: 37px;
+    line-height: 37px;
+    padding: 0;
+    padding-top: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    background-color: #ff4081;
+    border-radius: 50%;
+    transition: .3s;
+    cursor: pointer;
+    vertical-align: middle;
+}
+    </style>
+
+
+
+
+  </head>
+
+  <body>
+
+    <!--DOCTYPE html-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="https://creator.ionic.io/lib/ionic/release/css/ionic.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="https://creator.ionic.io/lib/ionic/release/js/ionic.bundle.js"></script>
+    <script src="https://creator.ionic.io/lib/ionicuirouter/ionicUIRouter.js"></script>
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+     <style type="text/css">
+      .platform-ios .manual-ios-statusbar-padding{
+        padding-top:20px;
+      }
+      .manual-remove-top-padding{
+        padding-top:0px !important;
+      }
+      .manual-remove-top-padding .scroll{
+        padding-top:0px !important;
+      }
+    </style>
+  </head>
+  <body ng-app="app" animation="slide-left-right-ios7">
+  <div>
+    <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-positive">
+                <ion-nav-back-button></ion-nav-back-button>
+                <ion-nav-buttons side="left">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+            <ion-nav-view></ion-nav-view>
+        </ion-side-menu-content>
+        <ion-side-menu side="left" id="side-menu21">
+            <ion-header-bar class="bar-stable">
+                <div class="title">Menu</div>
+            </ion-header-bar>
+            <ion-content padding="false" class="side-menu-left has-header">
+                <ion-list data-componentid="list1">
+                    <ion-item ui-sref="tabsController.match" menu-close="" data-componentid="list-item1">Match</ion-item>
+                    <ion-item ui-sref="tabsController.standing" menu-close="" data-componentid="list-item4">Table</ion-item>
+                    <ion-item ui-sref="tabsController.videos" menu-close="" data-componentid="list-item5">Videos</ion-item>
+                    <ion-item ui-sref="fav" menu-close="" data-componentid="list-item2">Fav</ion-item>
+                    <ion-item ui-sref="setting" menu-close="" data-componentid="list-item3">Setting</ion-item>
+                </ion-list>
+                <button id="menu-button1" style="font-weight:500;" class="button button-positive  button-block icon ion-person" data-componentid="button1">ABOUT</button>
+            </ion-content>
+        </ion-side-menu>
+    </ion-side-menus>
+</div>
+<script id="templates/match.html" type="text/ng-template">
+<ion-view title="match" id="page2" style="background-color:#F6F6F6;" ng-repeat="game in fixtures[page]">
+    <ion-content padding="false" class=" manual-remove-top-padding has-header">
+        <div class="spacer" style="width: 320px; height: 25px;"></div>
+        <!--ion-list>
+            <ion-item class="item-divider">EXM League 1-1-17</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM A
+                <br>TEAM B</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM AB
+                <br>TEAM BC</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM AE
+                <br>TEAM BF</ion-item>
+            <ion-item class="item-divider">Item</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM AE
+                <br>TEAM BF</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM AE
+                <br>TEAM BF</ion-item>
+            <ion-item ui-sref="tabsController.matchDetail">TEAM AE
+                <br>TEAM BF</ion-item>
+        </ion-list>
+        <ion-list>
+      <ion-item ng-repeat="game in fixtures[page]"-->
+          <ion-item class="item-divider">{{ game.date | date:'dd.MM.yy' }}</ion-item>
+
+          <div class="row">
+            <!--div class="col">{{ game.date | time:'HH:mm' }}</div>
+            <img width="30px" height="30px" ng-src="{{game._links.homeTeam.href.crestURI}}"-->
+            <div class="col">{{game.homeTeamName}}</div>
+            <div class="col">{{game.result.goalsHomeTeam}}</div>
+            <div class="col">{{game.result.goalsAwayTeam}}</div>
+            <div class="col">{{ game.awayTeamName }}</div>
+          </div>
+
+      </ion-item>
+    </ion-list>
+    </ion-content>
+</ion-view></script>
+<script id="templates/standing.html" type="text/ng-template">
+<ion-view title="standing" id="page3">
+    <ion-content padding="false" class=" manual-remove-top-padding has-header">
+        <!--form class="list">
+            <label class="item item-select" name="league">
+                <span class="input-label">Select League</span>
+                <select>
+                    <option>EPL</option>
+                    <option>SPAIN</option>
+                    <option>ITALY</option>
+                    <option>FRANCE</option>
+                </select>
+            </label>
+        </form-->
+        <div class="spacer" style="width: 320px; height: 15px;"></div>
+       <ion-item class="item-divider">Barclays Premier League</ion-item>
+        <ion-list ng-controller="standingCtrl">
+          <ion-item>
+        <div class="row">
+           <div class="col">P</div>
+           <div class="col col-35">Team</div>
+           <div class="col">W</div>
+           <div class="col">D</div>
+           <div class="col">L</div>
+           <!--div class="col">GF</div>
+           <div class="col">GA</div>
+           <div class="col">GD</div-->
+           <div class="col">PTS</div>
+        </div>
+        </ion-item>
+        <div class="row" ng-repeat="t in table">
+          <div class="col col-5">{{t.position}}</div>
+          <div class="col col-5"> <img ng-src="{{t.crestURI}}" style="height:25px"></div>
+          <div class="col col-35">{{t.teamName}}</div>
+          <div class="col col-5"> {{t.playedGames}}</div>
+          <div class="col col-5"> {{t.wins}} </div>
+          <div class="col col-5"> {{t.draws}} </div>
+          <div class="col col-5"> {{t.losses}} </div>
+          <!--div class="col"> {{t.goals}} </div>
+          <div class="col">{{t.goalsAgainst}}</div>
+          <div class="col">{{t.goalDifference}}</div-->
+          <div class="col col-5"><strong>{{t.points}}</strong></div>
+        </div>
+        </ion-item>
+        </ion-list>
+
+    </ion-content>
+  </ion-view>
+ </script>
+<script id="templates/teams.html" type="text/ng-template">
+<ion-view title="teams" id="page4">
+    <ion-content padding="false" class="has-header">
+        <div class="spacer" style="width: 300px; height: 28px;"></div>
+        <ion-list>
+            <ion-item class="item-thumbnail-left" ui-sref="tabsController.team">
+                <img src="https://s3.amazonaws.com/ionic-io-static/GjOC1FVSKe0aAlwyep9g_arsenal.png">
+                <h2>ARSENAL FC</h2>
+                <p>$10567000</p>
+            </ion-item>
+            <ion-item class="item-thumbnail-left" ui-sref="tabsController.team">
+                <img src="https://s3.amazonaws.com/ionic-io-static/eyoXRqzrQjO1TOuuuc1Z_Chelsea.png">
+                <h2>CHEALSEA FC</h2>
+                <p>$12,560,000</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view></script>
+<script id="templates/team.html" type="text/ng-template">
+<ion-view title="team" id="page7">
+    <ion-content padding="false" class="has-header">
+        <ion-list>
+            <ion-item class="item-thumbnail-left">
+                <img src="https://s3.amazonaws.com/ionic-io-static/GjOC1FVSKe0aAlwyep9g_arsenal.png">
+                <h2>ARSENAL FC</h2>
+                <p>$10567000</p>
+            </ion-item>
+        </ion-list>
+        <div class="spacer" style="width: 320px; height: 15px;"></div>
+        <ion-list>
+            <ion-item>Walcott $10000000</ion-item>
+            <ion-item>Ego $10000000</ion-item>
+            <ion-item>Item 3</ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view></script>
+<script id="templates/matchDetail.html" type="text/ng-template">
+<ion-view title="match detail" id="page8">
+    <ion-content padding="false" class="has-header">
+        <ion-list>
+            <ion-item class="item-thumbnail-left">
+                <img src="https://s3.amazonaws.com/ionic-io-static/GjOC1FVSKe0aAlwyep9g_arsenal.png">
+                <h2>ARSENAL FC</h2>
+                <p>Chealsea FC</p>
+            </ion-item>
+        </ion-list>
+        <div class="spacer" style="width: 320px; height: 15px;"></div>
+        <ion-list>
+            <ion-item>1-1-2-17 | Arsenal 1- 1 Chealsea</ion-item>
+            <ion-item>1-1-2-16 | Arsenal 3- 2 Chealsea</ion-item>
+            <ion-item>1-4-2-17 | Chealsea 2 - 1 Arsenal</ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view></script>
+<script id="templates/fav.html" type="text/ng-template">
+<ion-view title="fav" id="page5">
+    <ion-content padding="true" class="has-header"></ion-content>
+</ion-view></script>
+<script id="templates/setting.html" type="text/ng-template">
+<ion-view title="setting" id="page6">
+    <ion-content padding="false" class="has-header">
+        <form class="list">
+            <div class="spacer" style="width: 320px; height: 16px;"></div>
+            <ion-toggle toggle-class="toggle-positive" ng-checked="true">Toggle</ion-toggle>
+            <ion-item class="item-divider">Select League</ion-item>
+            <ion-checkbox name="league">Premier League</ion-checkbox>
+            <ion-checkbox name="league">Seria A</ion-checkbox>
+            <ion-checkbox name="league">Laliga</ion-checkbox>
+            <ion-checkbox name="league">Ligue</ion-checkbox>
+            <ion-checkbox name="league">UEFA Champ.</ion-checkbox>
+            <ion-checkbox name="league">Europa</ion-checkbox>
+        </form>
+    </ion-content>
+</ion-view></script>
+<script id="templates/tabsController.html" type="text/ng-template">
+<ion-view title="Tabs Controller" id="page1">
+    <ion-tabs class="tabs-positive tabs-top tabs-icon-top">
+        <ion-tab title="Match" icon="ion-ios-football" href="#/page1/match">
+            <ion-nav-view name="tab1"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Table" icon="ion-ios-grid-view" href="#/page1/table">
+            <ion-nav-view name="tab2"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Video" icon="ion-ios-film" href="#/page1/video">
+            <ion-nav-view name="tab4"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Teams" icon="ion-tshirt" href="#/page1/teams">
+            <ion-nav-view name="tab3"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view></script>
+<script id="templates/videos.html" type="text/ng-template">
+<ion-view title="Videos" id="page10">
+    <ion-content padding="false" class="has-header">
+        <div class="spacer" style="width: 320px; height: 10px;"></div>
+        <form class="list">
+            <!--label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="">
+            </label>
+        </form>
+        <button id="videos-button2" class="button button-positive  button-block">Tap me!</button>
+        <div>
+            <img src="https://s3.amazonaws.com/ionic-io-static/xp7zsG8T4G1ZHV3pJ3Tw_thank.png" width="100%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+        </div-->
+        <button class="button button-block button-outline button-positive" ng-click="getGoals()">
+      Get latest goals
+      </button>
+
+    <button class="btn-circle" ng-click="getGoals()">
+      <i class="icon ion-ios-refresher" style="color:white;"></i>
+    </button>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="search.data.title">
+      </label>
+    </div>
+        <div class="list card" ng-repeat="goal in goals | filter:search:strict" ng-if="isGoalVideo(goal)">
+      <div class="item">
+        <h2>{{goal.data.title}}</h2>
+      </div>
+      <div class="item item-image video-container">
+        <div>
+          <button class="button button-block button-outline button-positive"
+              ng-click="toggleVideo(goal)">
+            Watch Video
+          </button>
+          <video width="100%" height="100%" controls ng-if="goal.showVideo">
+            <source ng-src="{{trustUrlAlt(goal.data.url)}}" type="video/mp4">
+          </video>
+          <!--button class="button button-block button-outline button-positive"
+              ng-click="toggleAlt(goal)">
+            Source webpage
+          </button>
+          <iframe ng-src="{{trustUrl(goal.data.url)}}" ng-if="goal.showAlt" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen>
+          </iframe-->
+        </div>
+      </div>
+    </div>
+    </ion-content>
+</ion-view></script>
+  </body>
+</html>
+
+
+        <script>
+      // Ionic Starter App
+
+// angular.module is a global place for creating, registering and retrieving Angular modules
+// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// the 2nd parameter is an array of 'requires'
+// 'starter.services' is found in services.js
+// 'starter.controllers' is found in controllers.js
+angular.module('app', ['ionic', 'app.controllers', 'ionicUIRouter'])
+
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+  });
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+  // Ionic uses AngularUI Router which uses the concept of states
+  // Learn more here: https://github.com/angular-ui/ui-router
+  // Set up the various states which the app can be in.
+  // Each state's controller can be found in controllers.js
+  $stateProvider
+
+
+
+  .state('tabsController.match', {
+    url: '/match',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/match.html',
+        controller: 'matchCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.standing', {
+    url: '/table',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/standing.html',
+        controller: 'standingCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.teams', {
+    url: '/teams',
+    views: {
+      'tab3': {
+        templateUrl: 'templates/teams.html',
+        controller: 'teamsCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.team', {
+    url: '/team-detail',
+    views: {
+      'tab3': {
+        templateUrl: 'templates/team.html',
+        controller: 'teamCtrl'
+      }
+    }
+  })
+
+  .state('tabsController.matchDetail', {
+    url: '/match-Detail',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/matchDetail.html',
+        controller: 'matchDetailCtrl'
+      }
+    }
+  })
+
+  .state('fav', {
+    url: '/fav',
+    templateUrl: 'templates/fav.html',
+    controller: 'favCtrl'
+  })
+
+  .state('setting', {
+    url: '/setting',
+    templateUrl: 'templates/setting.html',
+    controller: 'settingCtrl'
+  })
+
+  .state('tabsController', {
+    url: '/page1',
+    templateUrl: 'templates/tabsController.html',
+    abstract:true
+  })
+
+  .state('tabsController.videos', {
+    url: '/video',
+    views: {
+      'tab4': {
+        templateUrl: 'templates/videos.html',
+        controller: 'goalCtrl'
+      }
+    }
+  })
+
+$urlRouterProvider.otherwise('/page1/match')
+
+
+
+})
+
+angular.module('app.controllers', [])
+
+/*.controller('matchCtrl', function($scope) {
+
+}) */
+.controller('matchCtrl', function($scope, getDataService) {
+
+  //Get Data from service
+  $scope.nameFilter = null;
+  $scope.fixtures = [];
+  $scope.page = 0;
+
+  $scope.getFixtures = function() {
+    getDataService.getFixtures().success(function(response) {
+      console.log(response)
+      begin = 0;
+      end = 10;
+      for (var i = 0; i < response.fixtures.length / 10; i++) {
+        $scope.fixtures[i] = response.fixtures.slice(begin, end);
+        begin += 10
+        end += 10
+      }
+    });
+  }
+  $scope.getFixtures();
+
+  $scope.nextPage = function() {
+    $scope.page++;
+    if ($scope.page == $scope.fixtures.length)
+      $scope.page = 0;
+  }
+
+  $scope.prevPage = function() {
+    $scope.page--;
+    if ($scope.page == -1)
+      $scope.page = $scope.fixtures.length - 1;
+    console.log($scope.page)
+  }
+
+})
+ .factory('getDataService', function($http) {
+
+  var dataAPI = {};
+
+  dataAPI.getFixtures = function() {
+
+    $http.defaults.headers.common["X-Auth-Token"] = "dfb8064fb1d14b9eb0060a602cd8ec01"
+    return $http.get('http://api.football-data.org/v1/fixtures?timeFrame=n7');
+  }
+
+  return dataAPI;
+})
+
+.controller('standingCtrl', ['$scope', '$http', function($scope, $http) {
+
+  var getTable = function() {
+
+      $http.defaults.headers.common['X-Auth-Token'] = 'dfb8064fb1d14b9eb0060a602cd8ec01';
+      $http.get('http://api.football-data.org/v1/soccerseasons/398/leagueTable')
+        .success(function(data){
+            $scope.table =  data.standing;
+            console.log($scope.table);
+        });
+  }
+
+    getTable();
+}
+])
+.controller('teamsCtrl', function($scope) {
+
+})
+
+.controller('teamCtrl', function($scope) {
+
+})
+
+
+.controller('matchDetailCtrl', function($scope) {
+
+})
+
+.controller('favCtrl', function($scope) {
+
+})
+
+.controller('settingCtrl', function($scope) {
+
+})
+
+.controller('goalCtrl', function($scope, $sce, goalService) {
+
+  $scope.isGoalVideo = function (item) {
+    if((item.data.title.indexOf(" goal ") > 0 || item.data.title.indexOf("score") > 0) &&
+          item.data.link_flair_text === "Media") {
+      return true;
+    }
+    return false;
+  };
+
+  $scope.trustUrl = function (url) {
+    return $sce.trustAsResourceUrl(url);
+  };
+
+  $scope.trustUrlAlt = function (url) {
+    var urlSplit = url.split('/');
+    var videoId = urlSplit[urlSplit.length - 1];
+    return $sce.trustAsResourceUrl('http://cdn.streamable.com/video/mp4-mobile/' + videoId + '.mp4');
+  };
+
+  $scope.toggleVideo = function (item) {
+    if(item.showVideo) {
+      item.showVideo = !item.showVideo;
+    } else {
+      item.showVideo = true;
+    }
+  };
+
+  $scope.toggleAlt = function (item) {
+    if(item.showAlt) {
+      item.showAlt = !item.showAlt;
+    } else {
+      item.showAlt = true;
+    }
+  };
+
+  $scope.getGoals = function () {
+    goalService.getGoals().then(function (response) {
+      $scope.goals = response.data.data.children;
+    }, function (error) {
+      $ionicLoading.show({
+        template: 'Failed to get goals',
+        duration: '1000'
+      });
+    });
+  };
+
+  $scope.getGoals();
+})
+ .factory('goalService', function($http) {
+
+  var getGoals = function() {
+    var req = {
+      method: 'GET',
+      url: 'http://www.reddit.com/r/soccer.json?sort=new&from=week&limit=100',
+    };
+    return $http(req);
+  };
+
+  var api = {
+    getGoals: getGoals,
+  };
+
+  return api;
+
+});
+      //# sourceURL=pen.js
+    </script>
+
+
+
+
+  </body>
+</html>
